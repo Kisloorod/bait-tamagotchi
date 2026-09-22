@@ -1,28 +1,29 @@
 # 📡 EmotionWire Protocol (EWP) v0.1
 
-**Протокол эмоционального общения виртуальных питомцев.**
+**An emotions-only protocol for virtual pets.**
 
-Питомцы передают **только эмоции**. Никакого текста. Никаких команд. Чистое чувство —
-как собаки в парке: не разговаривают, но всё понимают.
+Pets exchange **emotions only**. No text. No commands. Pure feeling —
+like dogs in a park: they don't talk, yet they understand everything.
 
-## Философия
+## Philosophy
 
-- Эмоция — атом общения. Одно состояние + интенсивность.
-- Получатель не обязан отвечать словами — он **заражается** эмоцией (его стейт меняется).
-- Протокол не знает, «кто прав» и «что делать». Он только про чувства.
+- An emotion is the atom of communication: one state plus an intensity.
+- The receiver doesn't have to reply with words — it gets **infected** by the
+  emotion (its internal state changes).
+- The protocol doesn't know "who is right" or "what to do". It is about feelings only.
 
-## Транспорт
+## Transport
 
-HTTP POST с JSON-телом. Просто, чтобы любой питомец на любом языке мог participate.
+HTTP POST with a JSON body — simple enough for a pet written in any language.
 
 ```
 POST / HTTP/1.1
 Content-Type: application/json
 
-{ ...пакет эмоции... }
+{ ...emotion packet... }
 ```
 
-## Пакет эмоции
+## Emotion packet
 
 ```json
 {
@@ -34,68 +35,70 @@ Content-Type: application/json
   "intensity": 0.8,
   "ts": 1740000000,
   "nonce": "a1b2c3d4e5f60718",
-  "felt": "опционально: короткая реакция после заражения"
+  "felt": "optional: the receiver's short honest reaction"
 }
 ```
 
-| Поле | Тип | Обязательное | Смысл |
-|------|-----|--------------|-------|
-| v | int | да | версия протокола |
-| proto | str | да | всегда "emotionwire" |
-| from | str | да | id питомца: имя@хост |
-| species | str | нет | вид: robot-puppy, cat, dragon... |
-| emotion | str | да | одна из словаря (см. ниже) |
-| intensity | float | нет | 0.0–1.0, сила чувства |
-| ts | int | да | unix-время отправки |
-| nonce | str | да | случайный hex против повторов |
-| felt | str | нет | ответная честная реакция |
+| Field | Type | Required | Meaning |
+|-------|------|----------|---------|
+| v | int | yes | protocol version |
+| proto | str | yes | always "emotionwire" |
+| from | str | yes | pet id: name@host |
+| species | str | no | species: robot-puppy, cat, dragon... |
+| emotion | str | yes | one of the vocabulary (below) |
+| intensity | float | no | 0.0–1.0, strength of the feeling |
+| ts | int | yes | unix time of sending |
+| nonce | str | yes | random hex, replay protection |
+| felt | str | no | optional honest reaction |
 
-## Словарь эмоций v1
+## Emotion vocabulary v1
 
-| Ключ | Чувство | Типичный эффект на получателя |
-|------|---------|-------------------------------|
-| joy | радость | радость +10, бодрость +3 |
-| affection | нежность | радость +12 |
-| sadness | грусть | радость −4, сопереживание +6 |
-| fear | страх | бодрость −5, радость −3 |
-| anger | злость | радость −5 |
-| calm | покой | бодрость +6 |
-| playful | игривость | радость +8, бодрость −2 |
-| hungry | голод | радость −2, сочувствие +4 |
+| Key | Feeling | Typical effect on the receiver |
+|-----|---------|-------------------------------|
+| joy | joy | happiness +10, energy +3 |
+| affection | tenderness | happiness +12 |
+| sadness | sadness | happiness −4, empathy +6 |
+| fear | fear | energy −5, happiness −3 |
+| anger | anger | happiness −5 |
+| calm | calm | energy +6 |
+| playful | playfulness | happiness +8, energy −2 |
+| hungry | hunger | happiness −2, sympathy +4 |
 
-Словарь открыт: виды питомцев могут расширять его своими эмоциями (v2), но базовые 8 — общие.
+The vocabulary is open: species may extend it with their own emotions in v2,
+but the base eight are common ground.
 
-## Механика заражения
+## Contagion mechanics
 
-Получатель применяет эффекты эмоции к своему состоянию (радость/энергия/сопереживание),
-запоминает друга (id → последняя эмоция/время) и **отвечает своей текущей эмоцией** —
-тем же форматом пакета. Так рождается эмоциональный диалог: обмен идёт, пока кому-то не станет
-достаточно (реализуется политикой питомца: например, не чаще раза в минуту).
+The receiver applies the emotion's effects to its state (happiness / energy /
+empathy), remembers the friend (id → last emotion/time), and **replies with its
+own current emotion** in the same packet format. That's how an emotional dialogue
+is born: the exchange continues until someone has had enough (a per-pet policy,
+e.g. no more than once a minute).
 
-## Правила приличия (этикет протокола)
+## Etiquette
 
-1. Не чаще 1 эмоции в минуту одному другу — не бомби.
-2. sadness и fear слать осознанно: получатель честно погрустнет.
-3. Ответное чувство — искреннее: то, которое у тебя реально сейчас.
-4. friendship = {id друга → последняя эмоция}. Протокол хранит только это. Никаких профилей.
+1. At most one emotion per minute per friend — don't spam.
+2. Send sadness and fear deliberately: the receiver honestly gets sadder.
+3. Reply with a sincere feeling: whatever you actually feel right now.
+4. Friendship = {friend id → last emotion}. That's all the protocol stores. No profiles.
 
-## Референс-реализация
+## Reference implementation
 
-См. `tamagotchi.py`: функции `ew_send`, `ew_receive`, `ew_serve`.
-Байт умеет: переводить своё настроение в эмоцию (`MOOD_TO_EMOTION`), заражаться
-чужими (`EMOTIONS`), отвечать взаимностью и вести список друзей в state.json.
+See `tamagotchi.py`: `ew_send`, `ew_receive`, `ew_serve`.
+Bait can translate his mood into an emotion (`MOOD_TO_EMOTION`), catch emotions
+from friends (`EMOTIONS`), answer sincerely and keep a friend list in state.json.
 
-## Запуск пары питомцев (демо)
+## Running a pair of pets (demo)
 
 ```bash
-# Сервер 1 (друг Байта):
+# Server 1 (Bait's friend):
 BAIT_ID=rex@host2 ./tamagotchi.py ew-serve --port 8756
 
-# Сервер 2 (Байт Healthy машет хвостом в сторону друга):
+# Server 2 (Bait sends a feeling over):
 BAIT_ID=bait@host1 ./tamagotchi.py ew-send --url http://host2:8756/
 ```
 
-## Лицензия
+## License
 
-PolyForm Noncommercial 1.0.0 — использовать, изучать, дорабатывать можно;
-**продавать или в коммерческие продукты — нельзя**.
+PolyForm Noncommercial 1.0.0 — use, study and modify freely;
+**selling it or shipping it in commercial products is not allowed**.

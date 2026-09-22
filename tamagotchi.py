@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Байт (Bait) — серверный тамагочи с голосом и эмоциями.
-Подарок. Живёт в терминале, лает настоящим лаем, дружит по протоколу EmotionWire.
+"""Bait — a server-side tamagotchi with a real voice and emotions.
+A toy for your AI when it has nothing else to do. Lives in a terminal,
+barks with a real dog bark, makes friends over the EmotionWire protocol.
 
-Команды:
-  status          — показать состояние (по умолчанию)
-  feed            — покормить
-  play            — поиграть
-  voice [--out F] — озвучить реальным лаем (нужен ffmpeg; сэмплы в sfx/)
-  ew-send URL     — отправить свою эмоцию питомцу на URL (EmotionWire)
-  ew-serve [PORT] — принять эмоцию от друга (EmotionWire)
+Commands:
+  status          show state (default)
+  feed            feed him
+  play            play with him
+  voice [--out F] render a real bark (needs ffmpeg; samples in sfx/)
+  ew-send URL     send my current emotion to a friend's URL (EmotionWire)
+  ew-serve [PORT] receive emotions from friends (EmotionWire)
 """
 import json, os, sys, time, random, argparse, urllib.request
 

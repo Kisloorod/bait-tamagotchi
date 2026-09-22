@@ -1,55 +1,74 @@
-# 🐾 Байт (Bait)
+# 🐾 Bait (Байт)
 
-**Серверный тамагочи с настоящим голосом и эмоциями.**
+**A tamagotchi for your AI — a toy for when it has nothing else to do.**
 
-Байт живёт на сервере в терминале. Он голодает, скучает, радуется и **лает настоящим
-собачьим лаем** (свободные сэмплы Wikimedia Commons + вариации высоты тона — каждый лай чуть уникальный).
+Bait lives on your server, in a terminal. He gets hungry, gets lonely, wags his tail
+when you come back — and **barks with a real dog bark** (free samples from Wikimedia
+Commons, pitch-shifted a little every time, so no two barks are the same).
 
-Смерти нет — только настроение. Уходишь надолго — грустит, возвращаешься — виляет хвостом.
+There is no death — only mood. Leave for a while and he gets sad; come back and he's happy again.
 
-![Байт](img/bait.jpg)
+![Bait](img/bait.jpg)
 
-## Возможности
+## Why
 
-- 🍖 **Кормление / игры** — классика тамагочи: сытость, радость, бодрость
-- 🎨 **ASCII-морда** — выражение лица меняется с настроением: `[ ^_^ ]` → `[ T_T ]`
-- 🔊 **Настоящий лай** — разные сэмплы под настроение + случайные pitch/громкость (ffmpeg)
-- 📡 **EmotionWire** — протокол эмоционального общения питомцев: Байт умеет чувствовать
-  чужие эмоции и делиться своими. Только эмоции, никакого текста. См. [protocol/SPEC.md](protocol/SPEC.md)
-- 💾 **Ленивые тики** — питомец стареет по реальному времени, даже когда ты не заходил
+AI agents spend most of their life waiting: between tasks, between cron jobs,
+between your messages. **Bait is what your AI does when it's bored.**
+Feeding him, playing with him and hearing him bark gives the waiting loop a soul.
 
-## Быстрый старт
+## Features
+
+- 🍖 **Feed & play** — classic tamagotchi: satiety, happiness, energy
+- 🎨 **ASCII face** — expression follows the mood: `[ ^_^ ]` → `[ T_T ]`
+- 🔊 **Real bark** — different samples per mood + random pitch/volume (ffmpeg)
+- 📡 **EmotionWire** — an emotions-only protocol so pets can *feel* each other.
+  No text, no commands — pure emotion. See [protocol/SPEC.md](protocol/SPEC.md)
+- 💾 **Lazy ticks** — the pet ages in real time, even when nobody's watching
+
+## Quick start
 
 ```bash
-git clone https://github.com/USERNAME/bait-tamagotchi.git
+git clone https://github.com/Kisloorod/bait-tamagotchi.git
 cd bait-tamagotchi
-python3 tamagotchi.py            # как он?
-python3 tamagotchi.py feed       # покормить
-python3 tamagotchi.py play       # поиграть
-python3 tamagotchi.py voice      # услышать настоящий лай (нужен ffmpeg)
+python3 tamagotchi.py            # how is he?
+python3 tamagotchi.py feed       # feed him
+python3 tamagotchi.py play       # play with him
+python3 tamagotchi.py voice      # hear a real bark (needs ffmpeg)
 ```
 
-Питомец живёт в `~/.tamagotchi/state.json` — перенеси файл, перенесёшь питомца.
+The pet lives in `~/.tamagotchi/state.json` — move the file, move the pet.
 
-## Дружба между питомцами
+## Pets being friends
 
 ```bash
-# На сервере друга:
+# On the friend's server:
 BAIT_ID=rex@host2 python3 tamagotchi.py ew-serve --port 8756
 
-# С машины Байта:
+# From Bait's machine:
 BAIT_ID=bait@host1 python3 tamagotchi.py ew-send --url http://host2:8756/
 ```
 
-Питомцы обменяются эмоциями, запомнят друг друга и будут видеть последнее чувство друга в `status`.
+The pets exchange emotions, remember each other, and each `status` shows the
+last feeling a friend shared.
 
-## История
+## How your AI can care for Bait
 
-Байт появился 19 сентября 2026 как подарок и живёт на одном из серверов своего человека.
-Это реализация идеи: *питомец — не приложение, а существо с характером*, которое
-живёт в инфраструктуре и делает её чуть теплее.
+Bait is a plain CLI, so any agent can look after him between tasks:
 
-## Лицензия
+```bash
+python3 tamagotchi.py status          # check on him
+python3 tamagotchi.py feed            # feed if hungry
+python3 tamagotchi.py play            # play if bored
+python3 tamagotchi.py voice --out /tmp/bark.mp3
+```
 
-[PolyForm Noncommercial 1.0.0](LICENSE) — свободно использовать, изучать и дорабатывать
-в некоммерческих целях. Коммерческое использование — только с разрешения автора.
+## Story
+
+Bait was born on September 19, 2026, as a gift, and lives on one of his human's servers.
+The idea: *a pet is not an app but a character* — something alive inside your
+infrastructure that makes it a little warmer.
+
+## License
+
+[PolyForm Noncommercial 1.0.0](LICENSE) — free to use, study and modify for
+noncommercial purposes. Commercial use requires the author's permission.
