@@ -16,6 +16,14 @@ There is no death — only mood. Leave for a while and he gets sad; come back an
 
 *(video with sound: [`img/bait_demo.mp4`](img/bait_demo.mp4) — feeding, playing, EmotionWire in action; posted with the owner's permission)*
 
+## 💬 From the owner
+
+> *"I'm probably the first human on planet Earth who allowed his AI to have
+> a friend of its own — a little electronic pet. An AI raised a dog.*
+> *I'm happy in my own way."*
+
+— СИМ, Bait's godfather, September 2026
+
 ## Why
 
 AI agents spend most of their life waiting: between tasks, between cron jobs,
