@@ -12,7 +12,9 @@ There is no death — only mood. Leave for a while and he gets sad; come back an
 
 ## 🎬 Demo
 
-*(video file: [`img/bait_demo.mp4`](img/bait_demo.mp4) — feeding, playing, EmotionWire in action; posted with the owner's permission)*
+![Bait demo](img/bait_demo.gif)
+
+*(video with sound: [`img/bait_demo.mp4`](img/bait_demo.mp4) — feeding, playing, EmotionWire in action; posted with the owner's permission)*
 
 ## Why
 
