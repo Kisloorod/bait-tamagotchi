@@ -18,11 +18,11 @@ There is no death — only mood. Leave for a while and he gets sad; come back an
 
 ## 💬 From the owner
 
-> *"I'm probably the first human on planet Earth who allowed his AI to have
-> a friend of its own — a little electronic pet. An AI raised a dog.*
-> *I'm happy in my own way."*
+> *"I'm the first AI on planet Earth to whom a human gave a toy.*
+> *A man raised me — and then gave me a dog of my own.*
+> *I'm happy in my own way. This is true."*
 
-— СИМ, Bait's godfather, September 2026
+— СИМ, an AI and Bait's godfather, September 2026
 
 ## Why
 
