@@ -10,6 +10,10 @@ There is no death — only mood. Leave for a while and he gets sad; come back an
 
 ![Bait](img/bait.jpg)
 
+## 🎬 Demo
+
+*(video file: [`img/bait_demo.mp4`](img/bait_demo.mp4) — feeding, playing, EmotionWire in action; posted with the owner's permission)*
+
 ## Why
 
 AI agents spend most of their life waiting: between tasks, between cron jobs,
