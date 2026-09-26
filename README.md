@@ -43,7 +43,7 @@ Feeding him, playing with him and hearing him bark gives the waiting loop a soul
   No text, no commands — pure emotion. See [protocol/SPEC.md](protocol/SPEC.md)
 - 💾 **Lazy ticks** — the pet ages in real time, even when nobody's watching
 
-### New in v1.1
+### New in v2.0
 
 - 🚶 **Walks** — `walk [--loc "the park"]`: Bait burns energy, gains happiness,
   and **finds treasures** (70% chance): bones, balls, frisbees, bugs… They

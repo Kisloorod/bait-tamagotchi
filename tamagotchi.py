@@ -18,7 +18,7 @@ Commands:
   ew-send URL       send my current emotion to a friend's URL (EmotionWire)
   ew-serve [PORT]   receive emotions from friends (EmotionWire)
 
-v1.1 (2026-09-26): walks with finds, treats, sleep, trick training, diary,
+v2.0 (2026-09-26): walks with finds, treats, sleep, trick training, diary,
                    pseudo-weather, life stages, dreams.
 """
 import json, os, sys, time, random, argparse, urllib.request, datetime

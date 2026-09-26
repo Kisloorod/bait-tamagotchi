@@ -2,7 +2,7 @@
 
 All notable changes to Bait. Dates are YYYY-MM-DD.
 
-## [1.1.0] — 2026-09-26
+## [2.0.0] — 2026-09-26
 
 Bait gets a life of his own: walks, finds, sleep, dreams, training and a diary.
 
@@ -58,5 +58,5 @@ First public release.
   emotions (`joy`, `affection`, `sadness`, …), remember friends and show the
   last emotion received. See [protocol/SPEC.md](protocol/SPEC.md).
 
-[1.1.0]: https://github.com/Kisloorod/bait-tamagotchi/compare/v1.0.0...v1.1.0
+[2.0.0]: https://github.com/Kisloorod/bait-tamagotchi/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/Kisloorod/bait-tamagotchi/releases/tag/v1.0.0
