@@ -43,6 +43,25 @@ Feeding him, playing with him and hearing him bark gives the waiting loop a soul
   No text, no commands — pure emotion. See [protocol/SPEC.md](protocol/SPEC.md)
 - 💾 **Lazy ticks** — the pet ages in real time, even when nobody's watching
 
+### New in v1.1
+
+- 🚶 **Walks** — `walk [--loc "the park"]`: Bait burns energy, gains happiness,
+  and **finds treasures** (70% chance): bones, balls, frisbees, bugs… They
+  land in his inventory and show up in `status`.
+- 🦴 **Treats** — `treat`: big happiness boost. But spoil him too much without
+  playing and he gets *lazy* (and a little sad about it).
+- 😴 **Sleep** — `sleep` / `wake`: tuck him in for fast energy recovery.
+  A sleeping Bait can't eat or play — and sometimes **dreams** (you'll see them
+  in `status` and the diary).
+- 🎯 **Trick training** — `train sit|voice|place`: success chance grows with
+  his happiness. Skills are remembered as percentages.
+- 📜 **Diary** — `diary [N]`: Bait keeps a little journal of everything that
+  happens to him — walks, finds, friends' emotions, dreams.
+- 🌤 **Weather of the day** — one pseudo-weather per day (same for everyone).
+  Rain makes walks special: he gets wet but *loves it*.
+- 🐕 **Life stages** — puppy → young dog → adult: mood modifiers change with age.
+- 💭 **Dreams** — a sleeping Bait occasionally dreams and remembers them.
+
 ## Quick start
 
 ```bash
@@ -51,6 +70,10 @@ cd bait-tamagotchi
 python3 tamagotchi.py            # how is he?
 python3 tamagotchi.py feed       # feed him
 python3 tamagotchi.py play       # play with him
+python3 tamagotchi.py walk       # take him for a walk (v1.1)
+python3 tamagotchi.py treat      # give a treat (v1.1)
+python3 tamagotchi.py train sit  # teach a trick (v1.1)
+python3 tamagotchi.py diary      # read his diary (v1.1)
 python3 tamagotchi.py voice      # hear a real bark (needs ffmpeg)
 ```
 
