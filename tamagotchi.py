@@ -12,12 +12,14 @@ Commands:
   treat             give a treat (big happiness, small satiety; don't overdo it)
   sleep             tuck him in (fast energy recovery, no playing while asleep)
   wake              wake him up
-  train CMD         teach a trick: sit | voice | place (success grows with happiness)
+  train CMD         teach a trick: sit | voice | place | fas | come
   diary [N]         show the last N diary entries
   voice [--out F]   render a real bark (needs ffmpeg; samples in sfx/)
   ew-send URL       send my current emotion to a friend's URL (EmotionWire)
   ew-serve [PORT]   receive emotions from friends (EmotionWire)
 
+v2.1 (2026-09-26): new tricks «фас» and «ко мне» (come): fas needs spirit,
+                   come makes him happiest. Training success still grows with joy.
 v2.0 (2026-09-26): walks with finds, treats, sleep, trick training, diary,
                    pseudo-weather, life stages, dreams.
 """
@@ -70,8 +72,9 @@ FINDS = [
     ("🐛 жук!",          {"happiness": +10, "energy": -4}),
     ("📰 чья-то газета",  {"happiness": +1}),
 ]
-TRICKS = ["sit", "voice", "place"]
-TRICK_RU = {"sit": "сидеть", "voice": "голос", "place": "место"}
+TRICKS = ["sit", "voice", "place", "fas", "come"]
+TRICK_RU = {"sit": "сидеть", "voice": "голос", "place": "место",
+            "fas": "фас", "come": "ко мне"}
 
 STAGES = [                       # (порог возраста в часах, название, modifier)
     (0,   "щенок",        {"happiness": +5}),   # щенку всё радостно
@@ -411,12 +414,30 @@ def train(s, trick):
         return
     tr = s.setdefault("tricks", {})
     cur = tr.get(trick, 0)
+    # «фас»: усталый или грустный пёс не злится — тренировка не идёт
+    if trick == "fas" and (s["energy"] < 30 or mood(s) == "грустный"):
+        s["energy"] = clamp(s["energy"] - 2)
+        diary_add(s, "не стал учить «фас»: не в том настроении")
+        save(s)
+        print(f"🐾 {s['name']} посмотрел на тебя и не двинулся. «Фас» требует злости, а её сейчас нет.")
+        return
     # вероятность успеха растёт с радостью (50% + радость/2)
     if random.random() < 0.5 + s["happiness"] / 200:
         tr[trick] = min(100, cur + 10)
-        diary_add(s, f"выучил «{TRICK_RU[trick]}» ({tr[trick]}%)")
-        save(s)
-        print(f"🎯 {s['name']} выполнил «{TRICK_RU[trick]}»! Знание: {tr[trick]}%")
+        if trick == "fas":
+            s["happiness"] = clamp(s["happiness"] + 4)
+            diary_add(s, f"выучил «{TRICK_RU[trick]}» ({tr[trick]}%) — грозный пёс!")
+            save(s)
+            print(f"🎯 {s['name']} показал клыки и рявкнул! «Фас» выучен: {tr[trick]}%")
+        elif trick == "come":
+            s["happiness"] = clamp(s["happiness"] + 6)   # бегать к хозяину — счастье
+            diary_add(s, f"выучил «{TRICK_RU[trick]}» ({tr[trick]}%) — прибежал с радостью")
+            save(s)
+            print(f"🎯 {s['name']} пулей примчался к тебе! «Ко мне» выучено: {tr[trick]}%")
+        else:
+            diary_add(s, f"выучил «{TRICK_RU[trick]}» ({tr[trick]}%)")
+            save(s)
+            print(f"🎯 {s['name']} выполнил «{TRICK_RU[trick]}»! Знание: {tr[trick]}%")
     else:
         s["energy"] = clamp(s["energy"] - 3)
         diary_add(s, f"не вышло «{TRICK_RU[trick]}», пробуем ещё")

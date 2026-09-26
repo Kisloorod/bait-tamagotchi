@@ -2,6 +2,25 @@
 
 All notable changes to Bait. Dates are YYYY-MM-DD.
 
+## [2.1.0] — 2026-09-26
+
+Two new commands for training: «фас» and «ко мне».
+
+### Added
+
+- **«Фас»** (`train fas`): Bait bares his teeth and barks on command. Training
+  requires spirit — a tired (energy < 30) or sad Bait refuses to practice
+  aggression ("фас requires anger, and there is none right now"). Success gives
+  a small happiness bonus: he is proud of being scary.
+- **«Ко мне»** (`train come`): Bait dashes to you at full speed. Every success
+  gives +6 happiness — running to his human is the best thing in the world.
+  Both tricks train like the others: success chance `50% + happiness/2`,
+  +10% knowledge per success, failures logged honestly in the diary.
+
+### Changed
+
+- `train` now accepts 5 commands: `sit | voice | place | fas | come`.
+
 ## [2.0.0] — 2026-09-26
 
 Bait gets a life of his own: walks, finds, sleep, dreams, training and a diary.
@@ -58,5 +77,6 @@ First public release.
   emotions (`joy`, `affection`, `sadness`, …), remember friends and show the
   last emotion received. See [protocol/SPEC.md](protocol/SPEC.md).
 
+[2.1.0]: https://github.com/Kisloorod/bait-tamagotchi/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/Kisloorod/bait-tamagotchi/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/Kisloorod/bait-tamagotchi/releases/tag/v1.0.0
